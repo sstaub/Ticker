@@ -1,0 +1,15 @@
+Ticker 			KEYWORD1
+start			KEYWORD2
+resume			KEYWORD2
+pause			KEYWORD2
+stop			KEYWORD2
+update			KEYWORD2
+setInterval		KEYWORD2
+setCallback		KEYWORD2
+setRepeats		KEYWORD2
+getState		KEYWORD2
+getInterval		KEYWORD2
+getCallback		KEYWORD2
+getRepeats		KEYWORD2
+getRepeatsCounter	KEYWORD2
+getElapsedTime		KEYWORD2

@@ -1,0 +1,14 @@
+{
+  "name": "Ticker",
+  "keywords": "Ticker, Timer, Threads",
+  "description": "A library for creating Tickers which can call repeatly functions. Replaces delay() with non-blocking functions.",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/sstaub/Ticker"
+  },
+  "version": "2.0.2",
+  "frameworks": "arduino",
+  "platforms": "*"
+}
+
