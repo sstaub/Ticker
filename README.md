@@ -4,20 +4,20 @@ The **Arduino Ticker Library** allows you to create easily Ticker callbacks, whi
 
 ## New in v2.0
 - You can determine the number of repeats, instead of modes.
-- The internal resolution is now **micros()**, this works with intervals up to 70 minutes. For longer intervals you can change the resolution to **millis()**. ``` Ticker tickerObject(callbackFunction, 1000, 0, MILLIS) ```
+- The internal resolution is now **micros()**, this works with intervals up to 70 minutes. For longer intervals you can change the internal resolution to **millis()**. ``` Ticker tickerObject(callbackFunction, 1000, 0, MILLIS) ```
 - unified data types and smaller improvments
 
 
 ## Installation
 
-1. "Download":https://github.com/sstaub/Ticker/archive/master.zip the Master branch from GitHub.
+1. "Download": https://github.com/sstaub/Ticker/archive/master.zip the Master branch from GitHub.
 2. Unzip and modify the folder name to "Ticker"
 3. Move the modified folder on your Library folder (On your `Libraries` folder inside Sketchbooks or Arduino software).
 
 
 ## How to use
 
-First, include the TimerObject to your project:
+First, include the Ticker library to your project:
 
 ```
 #include "Ticker.h"
