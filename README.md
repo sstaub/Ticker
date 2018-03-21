@@ -120,7 +120,7 @@ Creates a Ticker object
 - parameter interval sets the interval time in ms
 - parameter interval resolution can changed to us instead of ms with setting the parameter resolution to MICROS_MICROS
 - parameter repeats sets the number of repeats the callback should executed, 0 is endless
-- parameter resolution sets the internal resolution of the Ticker, it can MICROS or MILLIS
+- parameter resolution sets the internal resolution of the Ticker, it can MICROS, MILLIS or MICROS_MICROS (for us intervals)
 
 **~Ticker()**<br>
 Destructor for Ticker object
@@ -143,7 +143,7 @@ Stop the Ticker.
 Must to be called in the loop(), it will check the Ticker, and if necessary, will run the callback
 
 **void setInterval(uint32_t interval)**<br>
-Set callback interval in ms.
+Set callback interval in ms or us when using MICROS_MICROS.
 
 **void setCallback(ftpr callback)**<br>
 Set function callback.
