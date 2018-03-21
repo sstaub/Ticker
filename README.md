@@ -1,23 +1,26 @@
-# Arduino Ticker Library v2.0
+# Arduino Ticker Library v2.1
 
-The **Arduino Ticker Library** allows you to create easily Ticker callbacks, which can call a function in a predetermined interval. You can change the number of repeats of the callbacks, if repeats is 0 the ticker runs in endless mode. Works like a "thread", where a secondary function will run when necessary. The library use no interupts of the hardware timers and works with the **micros() / millis()** function. You are not (really) limited in the number of Tickers.
+The **Arduino Ticker Library** allows you to create easily Ticker callbacks, which can call a function in a predetermined interval. You can change the number of repeats of the the callbacks, if repeats is 0 the ticker runs in endless mode. Works like a "thread", where a secondary function will run when necessary. The library use no interupts of the hardware timers and works with the **micros() / millis()** function. You are not (really) limited in the number of Tickers.
 
 ## New in v2.0
 - You can determine the number of repeats, instead of modes.
-- The internal resolution is now **micros()**, this works with intervals up to 70 minutes. For longer intervals you can change the internal resolution to **millis()**. ``` Ticker tickerObject(callbackFunction, 1000, 0, MILLIS) ```
+- The internal resolution is now **micros()**, this works with intervals up to 70 minutes. For longer intervals you can change the resolution to **millis()**. ``` Ticker tickerObject(callbackFunction, 1000, 0, MILLIS) ```
 - unified data types and smaller improvments
 
+## New in v2.1
+- You can change the interval time to microseconds. ``` Ticker tickerObject(callbackFunction, 100, 0, MICROS_MICROS) // interval is now 100us```
+- smaller improvments
 
 ## Installation
 
-1. "Download": https://github.com/sstaub/Ticker/archive/master.zip the Master branch from GitHub.
+1. "Download":https://github.com/sstaub/Ticker/archive/master.zip the Master branch from GitHub.
 2. Unzip and modify the folder name to "Ticker"
 3. Move the modified folder on your Library folder (On your `Libraries` folder inside Sketchbooks or Arduino software).
 
 
 ## How to use
 
-First, include the Ticker library to your project:
+First, include the TimerObject to your project:
 
 ```
 #include "Ticker.h"
@@ -45,7 +48,7 @@ If you use delay(), the Ticker will be ignored! You cannot use delay() command w
 
 ## Example
 
-Complete example. Here we created four timers, you can run it and test the result in the Serial monitor and the on board LED.
+Complete example. Here we created three timers, you can run it and test the result in the Serial monitor and the on board LED.
 
 ```
 #include "Ticker.h"
@@ -57,19 +60,18 @@ void blink();
 
 bool ledState;
 
-Ticker timer1(printMessage, 0, 1); // calls 'printMessage' one time, immediataly
-Ticker timer2(printCounter, 1000); // calls 'printCounter' infinitely, every second
-Ticker timer3(printCountdown, 1000, 5); // calls 'printCountdown' 5 times, every second
-Ticker timer4; // creates a Ticker object named timer4
+Ticker timer1(printMessage, 0, 1);
+Ticker timer2(printCounter, 1000);
+Ticker timer3(printCountdown, 1000, 5);
+Ticker timer4;
 
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
   delay(2000);
-  timer4.setCallback(blink); // sets the callback of timer4 to function 'blink'
-  timer4.setInterval(500); // sets the intervall of timer4 to 500 ms
-  // start the Tickers
+  timer4.setCallback(blink);
+  timer4.setInterval(500);
   timer1.start();
   timer2.start();
   timer3.start();
@@ -77,7 +79,6 @@ void setup() {
   }
 
 void loop() {
-  // update the Tickers
   timer1.update();
   timer2.update();
   timer3.update();
@@ -89,10 +90,10 @@ void printCounter() {
   Serial.println(timer2.getRepeatsCounter());
   }
 
-void printCountdown() {
-  Serial.print("Countdowm ");
-  Serial.println(timer3.getRepeats() - timer3.getRepeatsCounter());
-  }
+  void printCountdown() {
+    Serial.print("Countdowm ");
+    Serial.println(timer3.getRepeats() - timer3.getRepeatsCounter());
+    }
 
 void printMessage() {
   Serial.println("Hello!");
@@ -117,6 +118,7 @@ Creates a Ticker object without parameters.
 Creates a Ticker object
 - parameter callback for the function name you want to call
 - parameter interval sets the interval time in ms
+- parameter interval resolution can changed to us instead of ms with setting the parameter resolution to MICROS_MICROS
 - parameter repeats sets the number of repeats the callback should executed, 0 is endless
 - parameter resolution sets the internal resolution of the Ticker, it can MICROS or MILLIS
 

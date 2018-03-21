@@ -33,7 +33,7 @@
  * @param MILLIS set the resolution to millis, for longer cycles over 70 minutes
  *
  */
-enum resolution_t {MICROS, MILLIS};
+enum resolution_t {MICROS, MILLIS, MICROS_MICROS};
 
 /** Ticker status
  *
@@ -162,9 +162,9 @@ private:
 	void init(fptr callback, uint32_t interval, uint16_t repeats, resolution_t resolution);
 	bool tick();
 	bool enabled;
-	uint32_t _interval;
-	uint16_t _repeats;
-	resolution_t _resolution = MICROS;
+	uint32_t interval;
+	uint16_t repeats;
+	resolution_t resolution = MICROS;
 	uint32_t counter;
 	status_t state;
 	fptr call;
