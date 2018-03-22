@@ -24,59 +24,52 @@
 
 #include "Ticker.h"
 
-Ticker::Ticker() {
-	init(NULL, 0, 0, MICROS);
-	}
-
-Ticker::Ticker(fptr callback, uint32_t interval, uint16_t repeats, resolution_t resolution) {
-	init(callback, interval, repeats, resolution);
+Ticker::Ticker(fptr callback, uint32_t interval, uint16_t repeat, resolution_t resolution) {
+	this->resolution = resolution;
+	if(resolution == MICROS) interval = interval * 1000;
+	this->interval = interval;
+	this->repeat = repeat;
+	this->callback = callback;
+	enabled = false;
+	lastTime = 0;
+	counts = 0;
 	}
 
 Ticker::~Ticker() {}
 
-void Ticker::init(fptr callback, uint32_t interval, uint16_t repeats, resolution_t resolution) {
-	this->resolution = resolution;
-	setInterval(interval);
-	setRepeats(repeats);
-	setCallback(callback);
-	enabled = false;
-	lastTime = 0;
-	counter = 0;
-	}
-
 void Ticker::start() {
-	if (getCallback() == NULL) return;
+	if (callback == NULL) return;
 	if(resolution == MILLIS) lastTime = millis();
 	else lastTime = micros();
 	enabled = true;
-	counter = 0;
-	state = RUNNING;
+	counts = 0;
+	status = RUNNING;
 	}
 
 void Ticker::resume() {
-	if (getCallback() == NULL) return;
+	if (callback == NULL) return;
 	if(resolution == MILLIS) lastTime = millis() - diffTime;
 	else lastTime = micros() - diffTime;
-	if(state == STOPPED) counter = 0;
+	if(status == STOPPED) counts = 0;
 	enabled = true;
-	state = RUNNING;
+	status = RUNNING;
 	}
 
 void Ticker::stop() {
 	enabled = false;
-	counter = 0;
-	state = STOPPED;
+	counts = 0;
+	status = STOPPED;
 	}
 
 void Ticker::pause() {
 	if(resolution == MILLIS) diffTime = millis() - lastTime;
 	else diffTime = micros() - lastTime;
 	enabled = false;
-	state = PAUSED;
+	status = PAUSED;
 	}
 
 void Ticker::update() {
-	if(tick()) call();
+	if(tick()) callback();
 	}
 
 bool Ticker::tick() {
@@ -84,12 +77,12 @@ bool Ticker::tick() {
 	if(resolution == MILLIS) {
 		if ((millis() - lastTime) >= interval) {
 			lastTime = millis();
-			if(repeats - counter == 1) {
+			if(repeat - counts == 1) {
 				enabled = false;
-				counter++;
+				counts++;
 				}
 			else {
-				counter++;
+				counts++;
 				}
 	  	return true;
 			}
@@ -97,13 +90,13 @@ bool Ticker::tick() {
 	else {
 		if ((micros() - lastTime) >= interval) {
 			lastTime = micros();
-			if(repeats - counter == 1)
+			if(repeat - counts == 1)
 				{
 				enabled = false;
-				counter++;
+				counts++;
 				}
 			else {
-				counter++;
+				counts++;
 				}
 			return true;
 			}
@@ -111,40 +104,15 @@ bool Ticker::tick() {
 	return false;
 	}
 
-void Ticker::setInterval(uint32_t interval) {
-	if((resolution == MILLIS) || (resolution == MICROS_MICROS)) this->interval = interval;
-	else this->interval = interval * 1000;
-	}
-
-void Ticker::setCallback(fptr callback) {
-	call = callback;
-	}
-
-void Ticker::setRepeats(uint16_t repeats) {
-	this->repeats = repeats;
-	}
-
-uint32_t Ticker::getElapsedTime() {
+uint32_t Ticker::elapsed() {
 	if(resolution == MILLIS) return millis() - lastTime;
 	else return micros() - lastTime;
 	}
 
-status_t Ticker::getState() {
-		return state;
+status_t Ticker::state() {
+		return status;
 		}
 
-uint32_t Ticker::getInterval() {
-	return interval;
-	}
-
-fptr Ticker::getCallback() {
-	return call;
-	}
-
-uint16_t Ticker::getRepeats() {
-	return repeats;
-	}
-
-uint16_t Ticker::getRepeatsCounter() {
-	return counter;
+uint32_t Ticker::counter() {
+	return counts;
 	}

@@ -50,20 +50,15 @@ class Ticker {
 
 public:
 
-	/** create a Ticker object with none parameter which can set later
-	 *
-	 */
-	Ticker();
-
 	/** create a Ticker object
 	 *
 	 * @param callback the name of the function to call
-	 * @param ms interval length
-	 * @param repeats default 0 -> endless, repeats > 0 -> number of repeats
+	 * @param interval interval length in ms or us
+	 * @param repeat default 0 -> endless, repeat > 0 -> number of repeats
 	 * @param resolution default MICROS for tickers under 70min, use MILLIS for tickers over 70 min
 	 *
 	 */
-	Ticker(fptr callback, uint32_t ms, uint16_t repeats = 0, resolution_t resolution = MICROS);
+	Ticker(fptr callback, uint32_t interval, uint16_t repeat = 0, resolution_t resolution = MICROS);
 
 	/** destructor for the Ticker object
 	 *
@@ -95,81 +90,37 @@ public:
 	 */
 	void update();
 
-	/** interval time setting
-	 *
-	 * @param interval sets the interval time in ms
-	 *
-	 */
-	void setInterval(uint32_t interval);
-
-	/** callback setting
-	 *
-	 * @param callback sets the name of the function to call
-	 *
-	 */
-	void setCallback(fptr callback);
-
-	/** number of repeats
-	 *
-	 * @param repeats sets the number of repeats, 0 is endless mode
-	 *
-	 */
-	void setRepeats(uint16_t repeats);
-
 	/** actual ellapsed time
 	 *
 	 * @returns the elapsed time after the last tick
 	 *
 	 */
-	uint32_t getElapsedTime();
+	uint32_t elapsed();
 
 	/** get the state of the ticker
 	 *
 	 * @returns the state of the ticker: STOPPED, RUNNING or PAUSED
 	 */
-	status_t getState();
-
-	/** get the interval time
-	 *
-	 * @returns the interval time of the ticker object
-	 *
-	 */
-	uint32_t getInterval();
-
-	/** get the callback pointer
-	 *
-	 * @returns the function pointer of the callback
-	 *
-	 */
-	fptr getCallback();
-
-	/** get the numbers of repeats
-	 *
-	 * @returns the number of repeats, 0 is endless mode
-	 *
-	 */
-	uint16_t getRepeats();
+	status_t state();
 
 	/** get the numbers of executed repeats
 	 *
 	 * @returns the number of executed repeats
 	 *
 	 */
-	uint16_t getRepeatsCounter();
-
+	uint32_t counter();
 
 private:
-	void init(fptr callback, uint32_t interval, uint16_t repeats, resolution_t resolution);
 	bool tick();
 	bool enabled;
 	uint32_t interval;
-	uint16_t repeats;
+	uint16_t repeat;
 	resolution_t resolution = MICROS;
-	uint32_t counter;
-	status_t state;
-	fptr call;
+	uint32_t counts;
+	status_t status;
+	fptr callback;
 	uint32_t lastTime;
 	uint32_t diffTime;
 };
 
-#endif // TICKER_H
+#endif

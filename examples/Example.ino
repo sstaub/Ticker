@@ -4,25 +4,27 @@ void printMessage();
 void printCounter();
 void printCountdown();
 void blink();
+void printCountUS();
 
 bool ledState;
+int counterUS;
 
 Ticker timer1(printMessage, 0, 1);
-Ticker timer2(printCounter, 1000);
+Ticker timer2(printCounter, 1000, MILLIS);
 Ticker timer3(printCountdown, 1000, 5);
-Ticker timer4;
+Ticker timer4(blink, 500);
+Ticker timer5(printCountUS, 100, 0, MICROS_MICROS);
 
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
   delay(2000);
-  timer4.setCallback(blink);
-  timer4.setInterval(500);
   timer1.start();
   timer2.start();
   timer3.start();
   timer4.start();
+  timer5.start();
   }
 
 void loop() {
@@ -30,16 +32,17 @@ void loop() {
   timer2.update();
   timer3.update();
   timer4.update();
+  timer5.update();
   }
 
 void printCounter() {
   Serial.print("Counter ");
-  Serial.println(timer2.getRepeatsCounter());
+  Serial.println(timer2.counter());
   }
 
   void printCountdown() {
     Serial.print("Countdowm ");
-    Serial.println(timer3.getRepeats() - timer3.getRepeatsCounter());
+    Serial.println(5 - timer3.counter());
     }
 
 void printMessage() {
@@ -49,4 +52,12 @@ void printMessage() {
 void blink() {
   digitalWrite(LED_BUILTIN, ledState);
   ledState = !ledState;
+  }
+
+void printCountUS() {
+  counterUS++;  
+  if (counterUS == 10000) {
+    Serial.println("10000 * 100us");
+    counterUS = 0;
+    }
   }
