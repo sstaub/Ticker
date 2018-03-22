@@ -52,7 +52,7 @@ If you use delay(), the Ticker will be ignored! You cannot use delay() command w
 
 ## Example
 
-Complete example. Here we created three timers, you can run it and test the result in the Serial monitor and the on board LED.
+Complete example. Here we created five timers, you can run it and test the result in the Serial monitor and the on board LED.
 
 ```
 #include "Ticker.h"
