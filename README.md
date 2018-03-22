@@ -130,8 +130,7 @@ STOPPED / RUNNING / PAUSED
 **Ticker(fptr callback, uint32_t interval, uint16_t repeats = 0, resolution_t resolution = MICROS)**<br>
 Creates a Ticker object
 - parameter callback for the function name you want to call
-- parameter interval sets the interval time in ms
-- parameter interval resolution can changed to us instead of ms with setting the parameter resolution to MICROS_MICROS
+- parameter interval sets the interval time in ms or us when using MICROS_MICROS with the resolution parameter
 - parameter repeats sets the number of repeats the callback should executed, 0 is endless
 - parameter resolution sets the internal resolution of the Ticker, it can MICROS, MICROS_MICROS or MILLIS
 
@@ -159,10 +158,10 @@ Must to be called in the loop(), it will check the Ticker, and if necessary, wil
 Returns the state of the Ticker.
 
 **uint32_t elapsed()**<br>
-Returns the time passed since the last tick.
+Returns the time passed since the last tick, ms or us depending from the resolution.
 
 **uint16_t counter()**<br>
-Get the number of executed callbacks.
+Returns the number of executed callbacks.
 
 
 
