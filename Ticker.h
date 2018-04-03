@@ -1,5 +1,5 @@
 /* Ticker library code is placed under the MIT license
- * Copyright (c) 2017 Stefan Staub
+ * Copyright (c) 2018 Stefan Staub
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -53,12 +53,12 @@ public:
 	/** create a Ticker object
 	 *
 	 * @param callback the name of the function to call
-	 * @param interval interval length in ms or us
+	 * @param timer interval length in ms or us
 	 * @param repeat default 0 -> endless, repeat > 0 -> number of repeats
 	 * @param resolution default MICROS for tickers under 70min, use MILLIS for tickers over 70 min
 	 *
 	 */
-	Ticker(fptr callback, uint32_t interval, uint16_t repeat = 0, resolution_t resolution = MICROS);
+	Ticker(fptr callback, uint32_t timer, uint16_t repeat = 0, resolution_t resolution = MICROS);
 
 	/** destructor for the Ticker object
 	 *
@@ -90,6 +90,13 @@ public:
 	 */
 	void update();
 
+	/**
+	 * @brief set the interval timer
+	 * 
+	 * @param timer interval length in ms or us
+	 */
+	void interval(uint32_t timer);
+
 	/** actual ellapsed time
 	 *
 	 * @returns the elapsed time after the last tick
@@ -113,7 +120,7 @@ public:
 private:
 	bool tick();
 	bool enabled;
-	uint32_t interval;
+	uint32_t timer;
 	uint16_t repeat;
 	resolution_t resolution = MICROS;
 	uint32_t counts;

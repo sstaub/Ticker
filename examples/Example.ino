@@ -33,6 +33,8 @@ void loop() {
   timer3.update();
   timer4.update();
   timer5.update();
+  if(timer4.counter() == 20) timer4.interval(200);
+  if(timer4.counter() == 80) timer4.interval(1000);
   }
 
 void printCounter() {

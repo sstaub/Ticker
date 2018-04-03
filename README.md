@@ -17,6 +17,9 @@ The **Arduino Ticker Library** allows you to create easily Ticker callbacks, whi
 - deleted many set and get functions
 - if you need former functionality please use the version 2.1
 
+## New in v3.1
+- added interval function
+
 ## Installation
 
 1. "Download":https://github.com/sstaub/Ticker/archive/master.zip the Master branch from GitHub.
@@ -90,6 +93,8 @@ void loop() {
   timer3.update();
   timer4.update();
   timer5.update();
+  if(timer4.counter() == 20) timer4.interval(200);
+  if(timer4.counter() == 80) timer4.interval(1000);
   }
 
 void printCounter() {
@@ -127,10 +132,10 @@ STOPPED / RUNNING / PAUSED
 
 ### Constructors / Destructor
 
-**Ticker(fptr callback, uint32_t interval, uint16_t repeats = 0, resolution_t resolution = MICROS)**<br>
+**Ticker(fptr callback, uint32_t timer, uint16_t repeats = 0, resolution_t resolution = MICROS)**<br>
 Creates a Ticker object
 - parameter callback for the function name you want to call
-- parameter interval sets the interval time in ms
+- parameter timer sets the interval time in ms
 - parameter interval resolution can changed to us instead of ms with setting the parameter resolution to MICROS_MICROS
 - parameter repeats sets the number of repeats the callback should executed, 0 is endless
 - parameter resolution sets the internal resolution of the Ticker, it can MICROS, MICROS_MICROS or MILLIS
@@ -154,6 +159,9 @@ Stop the Ticker.
 
 **void update()**<br>
 Must to be called in the loop(), it will check the Ticker, and if necessary, will run the callback
+
+**void interval(uint32_t timer)**<br>
+Changes the interval time of the Ticker.
 
 **status_t state()**<br>
 Returns the state of the Ticker.

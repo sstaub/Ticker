@@ -1,5 +1,5 @@
 /* Ticker library code is placed under the MIT license
- * Copyright (c) 2017 Stefan Staub
+ * Copyright (c) 2018 Stefan Staub
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -24,10 +24,10 @@
 
 #include "Ticker.h"
 
-Ticker::Ticker(fptr callback, uint32_t interval, uint16_t repeat, resolution_t resolution) {
+Ticker::Ticker(fptr callback, uint32_t timer, uint16_t repeat, resolution_t resolution) {
 	this->resolution = resolution;
-	if(resolution == MICROS) interval = interval * 1000;
-	this->interval = interval;
+	if(resolution == MICROS) timer = timer * 1000;
+	this->timer = timer;
 	this->repeat = repeat;
 	this->callback = callback;
 	enabled = false;
@@ -75,7 +75,7 @@ void Ticker::update() {
 bool Ticker::tick() {
 	if(!enabled)	return false;
 	if(resolution == MILLIS) {
-		if ((millis() - lastTime) >= interval) {
+		if ((millis() - lastTime) >= timer) {
 			lastTime = millis();
 			if(repeat - counts == 1) {
 				enabled = false;
@@ -88,7 +88,7 @@ bool Ticker::tick() {
 			}
 		}
 	else {
-		if ((micros() - lastTime) >= interval) {
+		if ((micros() - lastTime) >= timer) {
 			lastTime = micros();
 			if(repeat - counts == 1)
 				{
@@ -102,6 +102,11 @@ bool Ticker::tick() {
 			}
 		}
 	return false;
+	}
+
+void Ticker::interval(uint32_t timer) {
+	if(resolution == MICROS) timer = timer * 1000;
+	this->timer = timer;
 	}
 
 uint32_t Ticker::elapsed() {

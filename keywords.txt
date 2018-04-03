@@ -4,6 +4,7 @@ resume		KEYWORD2
 pause		KEYWORD2
 stop		KEYWORD2
 update		KEYWORD2
+interval	KEYWORD2
 state		KEYWORD2
 counter		KEYWORD2
 elapsed		KEYWORD2
