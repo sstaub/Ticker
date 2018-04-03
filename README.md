@@ -55,7 +55,7 @@ If you use delay(), the Ticker will be ignored! You cannot use delay() command w
 
 ## Example
 
-Complete example. Here we created three timers, you can run it and test the result in the Serial monitor and the on board LED.
+Complete example. Here we created five timers, you can run it and test the result in the Serial monitor and the on board LED.
 
 ```
 #include "Ticker.h"
@@ -135,8 +135,12 @@ STOPPED / RUNNING / PAUSED
 **Ticker(fptr callback, uint32_t timer, uint16_t repeats = 0, resolution_t resolution = MICROS)**<br>
 Creates a Ticker object
 - parameter callback for the function name you want to call
+<<<<<<< HEAD
 - parameter timer sets the interval time in ms
 - parameter interval resolution can changed to us instead of ms with setting the parameter resolution to MICROS_MICROS
+=======
+- parameter interval sets the interval time in ms or us when using MICROS_MICROS with the resolution parameter
+>>>>>>> 4975ea4e54a95d6d9ad649e67b3b5889e1067214
 - parameter repeats sets the number of repeats the callback should executed, 0 is endless
 - parameter resolution sets the internal resolution of the Ticker, it can MICROS, MICROS_MICROS or MILLIS
 
@@ -167,10 +171,10 @@ Changes the interval time of the Ticker.
 Returns the state of the Ticker.
 
 **uint32_t elapsed()**<br>
-Returns the time passed since the last tick.
+Returns the time passed since the last tick, ms or us depending from the resolution.
 
 **uint16_t counter()**<br>
-Get the number of executed callbacks.
+Returns the number of executed callbacks.
 
 
 
