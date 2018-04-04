@@ -93,8 +93,8 @@ void loop() {
   timer3.update();
   timer4.update();
   timer5.update();
-  if(timer4.counter() == 20) timer4.interval(200);
-  if(timer4.counter() == 80) timer4.interval(1000);
+  if (timer4.counter() == 20) timer4.interval(200);
+  if (timer4.counter() == 80) timer4.interval(1000);
   }
 
 void printCounter() {
@@ -102,10 +102,10 @@ void printCounter() {
   Serial.println(timer2.counter());
   }
 
-  void printCountdown() {
-    Serial.print("Countdowm ");
-    Serial.println(5 - timer3.counter());
-    }
+void printCountdown() {
+  Serial.print("Countdowm ");
+  Serial.println(5 - timer3.counter());
+  }
 
 void printMessage() {
   Serial.println("Hello!");
@@ -135,12 +135,7 @@ STOPPED / RUNNING / PAUSED
 **Ticker(fptr callback, uint32_t timer, uint16_t repeats = 0, resolution_t resolution = MICROS)**<br>
 Creates a Ticker object
 - parameter callback for the function name you want to call
-<<<<<<< HEAD
-- parameter timer sets the interval time in ms
-- parameter interval resolution can changed to us instead of ms with setting the parameter resolution to MICROS_MICROS
-=======
-- parameter interval sets the interval time in ms or us when using MICROS_MICROS with the resolution parameter
->>>>>>> 4975ea4e54a95d6d9ad649e67b3b5889e1067214
+- parameter timer sets the interval time in ms or us when using MICROS_MICROS with the resolution parameter
 - parameter repeats sets the number of repeats the callback should executed, 0 is endless
 - parameter resolution sets the internal resolution of the Ticker, it can MICROS, MICROS_MICROS or MILLIS
 

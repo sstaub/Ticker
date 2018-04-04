@@ -26,7 +26,7 @@
 
 Ticker::Ticker(fptr callback, uint32_t timer, uint16_t repeat, resolution_t resolution) {
 	this->resolution = resolution;
-	if(resolution == MICROS) timer = timer * 1000;
+	if (resolution == MICROS) timer = timer * 1000;
 	this->timer = timer;
 	this->repeat = repeat;
 	this->callback = callback;
@@ -39,7 +39,7 @@ Ticker::~Ticker() {}
 
 void Ticker::start() {
 	if (callback == NULL) return;
-	if(resolution == MILLIS) lastTime = millis();
+	if (resolution == MILLIS) lastTime = millis();
 	else lastTime = micros();
 	enabled = true;
 	counts = 0;
@@ -48,9 +48,9 @@ void Ticker::start() {
 
 void Ticker::resume() {
 	if (callback == NULL) return;
-	if(resolution == MILLIS) lastTime = millis() - diffTime;
+	if (resolution == MILLIS) lastTime = millis() - diffTime;
 	else lastTime = micros() - diffTime;
-	if(status == STOPPED) counts = 0;
+	if (status == STOPPED) counts = 0;
 	enabled = true;
 	status = RUNNING;
 	}
@@ -62,42 +62,31 @@ void Ticker::stop() {
 	}
 
 void Ticker::pause() {
-	if(resolution == MILLIS) diffTime = millis() - lastTime;
+	if (resolution == MILLIS) diffTime = millis() - lastTime;
 	else diffTime = micros() - lastTime;
 	enabled = false;
 	status = PAUSED;
 	}
 
 void Ticker::update() {
-	if(tick()) callback();
+	if (tick()) callback();
 	}
 
 bool Ticker::tick() {
-	if(!enabled)	return false;
-	if(resolution == MILLIS) {
+	if (!enabled)	return false;
+	if (resolution == MILLIS) {
 		if ((millis() - lastTime) >= timer) {
 			lastTime = millis();
-			if(repeat - counts == 1) {
-				enabled = false;
-				counts++;
-				}
-			else {
-				counts++;
-				}
+			if (repeat - counts == 1) enabled = false;
+			counts++;				
 	  	return true;
 			}
 		}
 	else {
 		if ((micros() - lastTime) >= timer) {
 			lastTime = micros();
-			if(repeat - counts == 1)
-				{
-				enabled = false;
-				counts++;
-				}
-			else {
-				counts++;
-				}
+			if (repeat - counts == 1) enabled = false;
+			counts++;
 			return true;
 			}
 		}
@@ -105,18 +94,18 @@ bool Ticker::tick() {
 	}
 
 void Ticker::interval(uint32_t timer) {
-	if(resolution == MICROS) timer = timer * 1000;
+	if (resolution == MICROS) timer = timer * 1000;
 	this->timer = timer;
 	}
 
 uint32_t Ticker::elapsed() {
-	if(resolution == MILLIS) return millis() - lastTime;
+	if (resolution == MILLIS) return millis() - lastTime;
 	else return micros() - lastTime;
 	}
 
 status_t Ticker::state() {
-		return status;
-		}
+	return status;
+	}
 
 uint32_t Ticker::counter() {
 	return counts;
