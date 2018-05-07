@@ -1,6 +1,6 @@
 # Arduino Ticker Library v3.0
 
-The **Arduino Ticker Library** allows you to create easily Ticker callbacks, which can call a function in a predetermined interval. You can change the number of repeats of the the callbacks, if repeats is 0 the ticker runs in endless mode. Works like a "thread", where a secondary function will run when necessary. The library use no interupts of the hardware timers and works with the **micros() / millis()** function. You are not (really) limited in the number of Tickers.
+The **Arduino Ticker Library** allows you to create easily Ticker callbacks, which can call a function in a predetermined interval. You can change the number of repeats of the callbacks, if repeats is 0 the ticker runs in endless mode. Works like a "thread", where a secondary function will run when necessary. The library use no interupts of the hardware timers and works with the **micros() / millis()** function. You are not (really) limited in the number of Tickers.
 
 ## New in v2.0
 - You can determine the number of repeats, instead of modes.
@@ -148,7 +148,7 @@ Destructor for Ticker object
 Start the Ticker. Will count the interval from the moment that you start it. If it is paused, it will restart the Ticker.
 
 **void resume()**<br>
-Resume the Ticker. If not started, it will start it. If paused, it will resume it. For example, in a Ticker of 5 seconds, if it was paused in 3 seconds, the resume in continue in 3 seconds. Start will set passed time to 0 and restart until get 5 seconds.
+Resume the Ticker. If not started, it will start it. If paused, it will resume it. For example, in a Ticker of 5 seconds, if it was paused at 3 seconds, the resume continues at 3 seconds. Start will set passed time to 0 and restart until it get 5 seconds.
 
 **void pause()**<br>
 Pause the Ticker, so you can resume it.
@@ -157,7 +157,7 @@ Pause the Ticker, so you can resume it.
 Stop the Ticker.
 
 **void update()**<br>
-Must to be called in the loop(), it will check the Ticker, and if necessary, will run the callback
+Must called in the loop(), it will check the Ticker, and if necessary, will run the callback
 
 **void interval(uint32_t timer)**<br>
 Changes the interval time of the Ticker.
