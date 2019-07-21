@@ -132,7 +132,7 @@ STOPPED / RUNNING / PAUSED
 
 ### Constructors / Destructor
 
-**Ticker(fptr callback, uint32_t timer, uint16_t repeats = 0, resolution_t resolution = MICROS)**<br>
+**Ticker(fptr callback, uint32_t timer, uint32_t repeats = 0, resolution_t resolution = MICROS)**<br>
 Creates a Ticker object
 - parameter callback for the function name you want to call
 - parameter timer sets the interval time in ms or us when using MICROS_MICROS with the resolution parameter
