@@ -24,7 +24,7 @@
 
 #include "Ticker.h"
 
-Ticker::Ticker(fptr callback, uint32_t timer, uint16_t repeat, resolution_t resolution) {
+Ticker::Ticker(fptr callback, uint32_t timer, uint32_t repeat, resolution_t resolution) {
 	this->resolution = resolution;
 	if (resolution == MICROS) timer = timer * 1000;
 	this->timer = timer;
