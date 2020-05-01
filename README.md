@@ -168,7 +168,7 @@ Returns the state of the Ticker.
 **uint32_t elapsed()**<br>
 Returns the time passed since the last tick, ms or us depending from the resolution.
 
-**uint16_t counter()**<br>
+**uint32_t counter()**<br>
 Returns the number of executed callbacks.
 
 
