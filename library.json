@@ -1,7 +1,7 @@
 {
   "name": "Ticker",
   "keywords": "Ticker, Timer, Threads",
-  "description": "A library for creating Tickers which can call repeatly functions. Replaces delay() with non-blocking functions.",
+  "description": "A library for creating Tickers which can call repeating functions. Replaces delay() with non-blocking functions.",
   "repository":
   {
     "type": "git",
