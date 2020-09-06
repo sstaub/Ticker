@@ -97,12 +97,26 @@ public:
 	 */
 	void interval(uint32_t timer);
 
+	/**
+	 * @brief get the interval timer
+	 *
+	 * @returns the value of the interval timer
+	 */
+	uint32_t interval();
+
 	/** actual ellapsed time
 	 *
 	 * @returns the elapsed time after the last tick
 	 *
 	 */
 	uint32_t elapsed();
+
+	/** actual remaining time
+	 *
+	 * @returns the remaining time until the next tick
+	 *
+	 */
+	uint32_t remaining();
 
 	/** get the state of the ticker
 	 *

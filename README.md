@@ -162,14 +162,17 @@ Must called in the loop(), it will check the Ticker, and if necessary, will run 
 **void interval(uint32_t timer)**<br>
 Changes the interval time of the Ticker.
 
+**uint32_t interval()**<br>
+Gets the interval time of the Ticker.
+
 **status_t state()**<br>
 Returns the state of the Ticker.
 
 **uint32_t elapsed()**<br>
 Returns the time passed since the last tick, ms or us depending from the resolution.
 
+**uint32_t remaining()**<br>
+Returns the time remaining until the next tick, ms or us depending from the resolution.
+
 **uint32_t counter()**<br>
 Returns the number of executed callbacks.
-
-
-

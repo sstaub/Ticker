@@ -98,9 +98,20 @@ void Ticker::interval(uint32_t timer) {
 	this->timer = timer;
 	}
 
+uint32_t Ticker::interval() {
+	return this->timer;
+	}
+
 uint32_t Ticker::elapsed() {
 	if (resolution == MILLIS) return millis() - lastTime;
 	else return micros() - lastTime;
+	}
+
+uint32_t Ticker::remaining() {
+	uint32_t t0 = this->elapsed();
+	uint32_t t1 = this->timer;
+	if (t0 >= t1) return 0;
+	else return t1 - t0;
 	}
 
 status_t Ticker::state() {
