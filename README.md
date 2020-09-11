@@ -4,11 +4,17 @@ The **Arduino Ticker Library** allows you to create easily Ticker callbacks, whi
 
 ## New in v2.0
 - You can determine the number of repeats, instead of modes.
-- The internal resolution is now **micros()**, this works with intervals up to 70 minutes. For longer intervals you can change the resolution to **millis()**. ``` Ticker tickerObject(callbackFunction, 1000, 0, MILLIS) ```
+- The internal resolution is now **micros()**, this works with intervals up to 70 minutes. For longer intervals you can change the resolution to **millis()**.
+```
+cpp Ticker tickerObject(callbackFunction, 1000, 0, MILLIS)
+```
 - unified data types and smaller improvments
 
 ## New in v2.1
-- You can change the interval time to microseconds. ``` Ticker tickerObject(callbackFunction, 100, 0, MICROS_MICROS) // interval is now 100us```
+- You can change the interval time to microseconds.
+```
+cpp Ticker tickerObject(callbackFunction, 100, 0, MICROS_MICROS) // interval is now 100us
+```
 - smaller improvments
 
 ## New in v3.0
@@ -31,20 +37,20 @@ The **Arduino Ticker Library** allows you to create easily Ticker callbacks, whi
 
 First, include the TimerObject to your project:
 
-```
+```cpp
 #include "Ticker.h"
 ```
 
 Now, you can create a new object in setup():
 
-```
+```cpp
 Ticker tickerObject(callbackFunction, 1000); 
 tickerObject.start(); //start the ticker.
 ```
 
 In your loop(), add:
 
-```
+```cpp
 tickerObject.update(); //it will check the Ticker 
 and if necessary, it will run the callback function.
 ```
@@ -57,7 +63,7 @@ If you use delay(), the Ticker will be ignored! You cannot use delay() command w
 
 Complete example. Here we created five timers, you can run it and test the result in the Serial monitor and the on board LED.
 
-```
+```cpp
 #include "Ticker.h"
 
 void printMessage();
