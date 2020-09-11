@@ -51,8 +51,7 @@ tickerObject.start(); //start the ticker.
 In your loop(), add:
 
 ```cpp
-tickerObject.update(); //it will check the Ticker 
-and if necessary, it will run the callback function.
+tickerObject.update(); //it will check the Ticker and if necessary, it will run the callback function.
 ```
 
 
