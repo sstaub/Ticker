@@ -5,15 +5,15 @@ The **Arduino Ticker Library** allows you to create easily Ticker callbacks, whi
 ## New in v2.0
 - You can determine the number of repeats, instead of modes.
 - The internal resolution is now **micros()**, this works with intervals up to 70 minutes. For longer intervals you can change the resolution to **millis()**.
-```
-cpp Ticker tickerObject(callbackFunction, 1000, 0, MILLIS)
+```cpp
+Ticker tickerObject(callbackFunction, 1000, 0, MILLIS)
 ```
 - unified data types and smaller improvments
 
 ## New in v2.1
 - You can change the interval time to microseconds.
-```
-cpp Ticker tickerObject(callbackFunction, 100, 0, MICROS_MICROS) // interval is now 100us
+```cpp
+Ticker tickerObject(callbackFunction, 100, 0, MICROS_MICROS) // interval is now 100us
 ```
 - smaller improvments
 
