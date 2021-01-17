@@ -45,18 +45,11 @@ enum resolution_t {MICROS, MILLIS, MICROS_MICROS};
 enum status_t {STOPPED, RUNNING, PAUSED};
 
 // Use std::function if present so users can use class members and lambdas
-#ifdef __has_include
-  #if __has_include(<functional>)
-    #include <functional>
-    using fptr = std::function<void()>;
-  #else
-    #ifdef ESP8266 // ESP8266 has <functional>, but doesn't declare it
-      #include <functional>
-      using fptr = std::function<void()>;
-    #else
-      typedef void (*fptr)();
-    #endif
-  #endif
+// Check whether <functional> exists
+// ESP8266 has <functional>, but doesn't define it
+#if (defined(__has_include) && __has_include(<functional>)) || defined(ESP8266)
+  #include <functional>
+  using fptr = std::function<void()>;
 #else
   typedef void (*fptr)();
 #endif
