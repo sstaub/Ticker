@@ -51,7 +51,7 @@ enum status_t {
 	RUNNING,
 	PAUSED};
 
-#ifdef __arm__
+#if defined(__arm__) || defined(ESP8266) || defined(ESP32)
 #include <functional>
 using fptr = std::function<void()>;
 #else
