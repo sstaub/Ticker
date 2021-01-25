@@ -8,3 +8,4 @@ interval	KEYWORD2
 state	KEYWORD2
 counter	KEYWORD2
 elapsed	KEYWORD2
+remaining	KEYWORD2

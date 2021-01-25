@@ -1,4 +1,4 @@
-# Arduino Ticker Library v3.2.x
+# Arduino Ticker Library v4.x.x
 
 The **Arduino Ticker Library** allows you to create easily Ticker callbacks, which can call a function in a predetermined interval. You can change the number of repeats of the callbacks, if repeats is 0 the ticker runs in endless mode. Works like a "thread", where a secondary function will run when necessary. The library use no interupts of the hardware timers and works with the **micros() / millis()** function. You are not (really) limited in the number of Tickers.
 
@@ -25,6 +25,11 @@ Ticker tickerObject(callbackFunction, 100, 0, MICROS_MICROS) // interval is now 
 
 ## New in v3.1
 - added interval function
+
+## New in v4.0
+- added interval function getter
+- added remaining function
+- added support for functional callbacks, only for ARM devices, e.g.<br> "Examples/FunctionalARM/FunctionalARM.ino"
 
 ## Installation
 
@@ -133,48 +138,203 @@ void printCountUS() {
 ## Documentation
 
 ### States
-STOPPED / RUNNING / PAUSED
 
-### Constructors / Destructor
+```cpp
+enum status_t {
+  STOPPED,
+  RUNNING,
+  PAUSED
+  };
+```
 
-**Ticker(fptr callback, uint32_t timer, uint32_t repeats = 0, resolution_t resolution = MICROS)**<br>
+### Constructors
+
+```cpp
+Tickers::Tickers(fptr callback, uint32_t timer, uint16_t repeats, interval_t mode)
+```
+
 Creates a Ticker object
-- parameter callback for the function name you want to call
-- parameter timer sets the interval time in ms or us when using MICROS_MICROS with the resolution parameter
-- parameter repeats sets the number of repeats the callback should executed, 0 is endless
-- parameter resolution sets the internal resolution of the Ticker, it can MICROS, MICROS_MICROS or MILLIS
 
-**~Ticker()**<br>
+- **callback** for the function name you want to call
+- **timer** set the interval time in ms or us depending from mode
+- **repeats** set the number of repeats the callback should executed, 0 is endless (default)
+- **mode** set the interval resolution to MILLIS (default) or MICROS
+
+**Example**
+
+```cpp
+Tickers timer(blink, 1000); // calls function blink() every second
+```
+
+### Destructor
+
+```cpp
+Tickers::~Tickers()
+```
 Destructor for Ticker object
-	
-### Functions
 
-**void start()**<br>
+## Class Functions
+
+### Ticker Start
+
+```cpp
+void Tickers::start()
+```
+
 Start the Ticker. Will count the interval from the moment that you start it. If it is paused, it will restart the Ticker.
 
-**void resume()**<br>
-Resume the Ticker. If not started, it will start it. If paused, it will resume it. For example, in a Ticker of 5 seconds, if it was paused at 3 seconds, the resume continues at 3 seconds. Start will set passed time to 0 and restart until it get 5 seconds.
+**Example**
 
-**void pause()**<br>
+```cpp
+timer.start();
+```
+
+### Ticker Resume
+
+```cpp
+void Tickers::resume()
+```
+
+Resume the Ticker. If not started, it will start it. If paused, it will resume it. For example, in a Ticker of 5 seconds, if it was paused in 3 seconds, the resume in continue in 3 seconds. Start will set passed time to 0 and restart until get 5 seconds.
+
+**Example**
+
+```cpp
+timer.resume();
+```
+
+### Ticker Pause
+
+```cpp
+void Tickers::pause()
+```
+
 Pause the Ticker, so you can resume it.
 
-**void stop()**<br>
+**Example**
+
+```cpp
+timer.pause();
+```
+
+### Ticker Stop
+
+```cpp
+void Tickers::stop()
+```
+
 Stop the Ticker.
 
-**void update()**<br>
-Must called in the loop(), it will check the Ticker, and if necessary, will run the callback
+**Example**
 
-**void interval(uint32_t timer)**<br>
-Changes the interval time of the Ticker.
+```cpp
+timer.stop();
+```
 
-**status_t state()**<br>
+### Ticker Update
+
+```cpp
+void Tickers::update()
+```
+
+Must to be called in the main while() loop, it will check the Ticker, and if necessary, will run the callback.
+
+**Example**
+
+```cpp
+while(1) {
+  timer.update();
+1.   }
+```
+
+### Ticker set Interval Time
+
+```cpp
+void Tickers::interval(uint32_t timer)
+```
+
+Changes the interval time of the Ticker. Depending from the mode it can millis or micro seconds.
+
+- **timer** set the interval time in ms or us depending from mode
+
+
+**Example**
+
+```cpp
+timer.interval(500); // new interval time
+```
+
+### Ticker get Interval Time
+
+```cpp
+uint32_t Tickers::interval()
+```
+
+Changes the interval time of the Ticker. Depending from the mode it can millis or micro seconds.
+
+**Example**
+
+```cpp
+uint32_t intervalTime;
+intervalTime = timer.interval(); // get the interval time
+```
+
+### Ticker State
+
+```cpp
+status_t Tickers::state()
+```
+
 Returns the state of the Ticker.
 
-**uint32_t elapsed()**<br>
-Returns the time passed since the last tick, ms or us depending from the resolution.
+**Example**
 
-**uint32_t counter()**<br>
-Returns the number of executed callbacks.
+```cpp
+status_t status;
+status = timer.state();
+```
 
+### Ticker Elapsed Time
 
+```cpp
+uint32_t Tickers::elapsed()
+```
 
+Returns the time passed since the last tick in ms or us depending on mode.
+
+**Example**
+
+```cpp
+uint32_t elapse;
+elapse = timer.elapsed();
+```
+
+### Ticker Remaining Time
+
+```cpp
+uint32_t Tickers::remaining()
+```
+
+Returns the remaining time to the next tick in ms or us depending on mode.
+
+**Example**
+
+```cpp
+uint32_t remain;
+remain = timer.remaining();
+```
+
+### Ticker Counter
+
+```cpp
+uint32_t Tickers::counter()
+```
+
+Get the number of executed callbacks.
+
+**Example**
+
+```cpp
+uint32_t count;
+count = timer.counter();
+```

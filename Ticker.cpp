@@ -94,13 +94,25 @@ bool Ticker::tick() {
 	}
 
 void Ticker::interval(uint32_t timer) {
-	if (resolution == MICROS) timer = timer * 1000;
+	if (resolution == MICROS) timer *= 1000;
 	this->timer = timer;
+	}
+
+uint32_t Ticker::interval() {
+	if (resolution == MILLIS) return timer / 1000;
+	else return timer;
 	}
 
 uint32_t Ticker::elapsed() {
 	if (resolution == MILLIS) return millis() - lastTime;
 	else return micros() - lastTime;
+	}
+
+uint32_t Ticker::remaining() {
+	if (resolution == MILLIS) {
+		return timer / 1000 - elapsed();
+		}
+	else return timer - elapsed();
 	}
 
 status_t Ticker::state() {
