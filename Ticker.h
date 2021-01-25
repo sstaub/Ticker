@@ -53,8 +53,7 @@ enum status_t {
 
 #ifdef __arm__
 #include <functional>
-using namespace std;
-using fptr = function<void()>;
+using fptr = std::function<void()>;
 #else
 typedef void (*fptr)();
 #endif
