@@ -29,7 +29,7 @@ Ticker tickerObject(callbackFunction, 100, 0, MICROS_MICROS) // interval is now 
 ## New in v4.0
 - added interval function getter
 - added remaining function
-- added support for functional callbacks, only for ARM devices, e.g.<br> "Examples/FunctionalARM/FunctionalARM.ino"
+- added support for functional callbacks, only for ARM and ESP devices, e.g.<br> "Examples/FunctionalARM/FunctionalARM.ino"
 
 ## Installation
 
