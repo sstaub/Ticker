@@ -270,7 +270,7 @@ timer.interval(500); // new interval time
 uint32_t Tickers::interval()
 ```
 
-Changes the interval time of the Ticker. Depending from the mode it can millis or micro seconds.
+Get the interval time of the Ticker. Depending from the mode it can millis or micro seconds.
 
 **Example**
 
