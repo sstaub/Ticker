@@ -2,13 +2,19 @@
 
 The **Arduino Ticker Library** allows you to create easily Ticker callbacks, which can call a function in a predetermined interval. You can change the number of repeats of the callbacks, if repeats is 0 the ticker runs in endless mode. Works like a "thread", where a secondary function will run when necessary. The library use no interupts of the hardware timers and works with the **micros() / millis()** function. You are not (really) limited in the number of Tickers.
 
-## New in v2.0
-- You can determine the number of repeats, instead of modes.
-- The internal resolution is now **micros()**, this works with intervals up to 70 minutes. For longer intervals you can change the resolution to **millis()**.
-```cpp
-Ticker tickerObject(callbackFunction, 1000, 0, MILLIS)
-```
-- unified data types and smaller improvments
+## New in v4.0
+- added get interval function
+- added remaining function
+- added support for functional callbacks, only for ARM and ESP devices, e.g.<br> "Examples/FunctionalARM/FunctionalARM.ino"
+
+## New in v3.1
+- added set interval function
+
+## New in v3.0
+- radical simplified API
+- generally you have to declare all settings in the constructor
+- deleted many set and get functions
+- if you need former functionality please use the version 2.1
 
 ## New in v2.1
 - You can change the interval time to microseconds.
@@ -17,19 +23,13 @@ Ticker tickerObject(callbackFunction, 100, 0, MICROS_MICROS) // interval is now 
 ```
 - smaller improvments
 
-## New in v3.0
-- radical simplified API
-- generally you have to declare all settings in the constructor
-- deleted many set and get functions
-- if you need former functionality please use the version 2.1
-
-## New in v3.1
-- added interval function
-
-## New in v4.0
-- added interval function getter
-- added remaining function
-- added support for functional callbacks, only for ARM and ESP devices, e.g.<br> "Examples/FunctionalARM/FunctionalARM.ino"
+## New in v2.0
+- You can determine the number of repeats, instead of modes.
+- The internal resolution is now **micros()**, this works with intervals up to 70 minutes. For longer intervals you can change the resolution to **millis()**.
+```cpp
+Ticker tickerObject(callbackFunction, 1000, 0, MILLIS)
+```
+- unified data types and smaller improvments
 
 ## Installation
 
