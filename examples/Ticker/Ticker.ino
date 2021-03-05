@@ -10,7 +10,7 @@ bool ledState;
 int counterUS;
 
 Ticker timer1(printMessage, 0, 1);
-Ticker timer2(printCounter, 1000, MILLIS);
+Ticker timer2(printCounter, 1000, 0, MILLIS);
 Ticker timer3(printCountdown, 1000, 5);
 Ticker timer4(blink, 500);
 Ticker timer5(printCountUS, 100, 0, MICROS_MICROS);

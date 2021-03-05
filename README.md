@@ -80,7 +80,7 @@ bool ledState;
 int counterUS;
 
 Ticker timer1(printMessage, 0, 1); // once, immediately 
-Ticker timer2(printCounter, 1000, MILLIS); // internal resolution is milli seconds
+Ticker timer2(printCounter, 1000, 0, MILLIS); // internal resolution is milli seconds
 Ticker timer3(printCountdown, 1000, 5); // 5 times, every second
 Ticker timer4(blink, 500); // changing led every 500ms
 Ticker timer5(printCountUS, 100, 0, MICROS_MICROS); // the interval time is 100us and the internal resolution is micro seconds
@@ -163,7 +163,10 @@ Creates a Ticker object
 **Example**
 
 ```cpp
-Tickers timer(blink, 1000); // calls function blink() every second
+Tickers timer(blink, 1000); // calls function blink() every second, internal resolution is micros, running endless
+Tickers timer(blink, 1000, 5); // calls function blink() every second, internal resolution is micros, only 5 repeats
+Tickers timer(blink, 1000, 0, MILLIS); // calls function blink() every second, internal resolution is millis, running endless
+Tickers timer(blink, 1000, 0, MICROS_MICROS); // calls function blink() every 1000 microsecond, internal resolution is micros, running endless
 ```
 
 ### Destructor

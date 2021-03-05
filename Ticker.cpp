@@ -73,23 +73,14 @@ void Ticker::update() {
 	}
 
 bool Ticker::tick() {
-	if (!enabled)	return false;
-	if (resolution == MILLIS) {
-		if ((millis() - lastTime) >= timer) {
-			lastTime = millis();
-			if (repeat - counts == 1) enabled = false;
-			counts++;				
-	  	return true;
-			}
-		}
-	else {
-		if ((micros() - lastTime) >= timer) {
-			lastTime = micros();
-			if (repeat - counts == 1) enabled = false;
-			counts++;
-			return true;
-			}
-		}
+	if (!enabled)	return false;	
+	uint32_t currentTime = (resolution == MILLIS) ? millis() : micros();
+ 	if ((currentTime - lastTime) >= timer) {
+ 		lastTime = currentTime;
+ 		if (repeat - counts == 1 && counts != 0xFFFFFFFF) enabled = false;
+		counts++;
+ 		return true;
+ 		}
 	return false;
 	}
 
