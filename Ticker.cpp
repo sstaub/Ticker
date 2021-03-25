@@ -80,7 +80,7 @@ bool Ticker::tick() {
  		if (repeat - counts == 1 && counts != 0xFFFFFFFF) {
 			enabled = false;
 			status = STOPPED;
-		}
+			}
 		counts++;
  		return true;
  		}
