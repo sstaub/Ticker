@@ -77,7 +77,10 @@ bool Ticker::tick() {
 	uint32_t currentTime = (resolution == MILLIS) ? millis() : micros();
  	if ((currentTime - lastTime) >= timer) {
  		lastTime = currentTime;
- 		if (repeat - counts == 1 && counts != 0xFFFFFFFF) enabled = false;
+ 		if (repeat - counts == 1 && counts != 0xFFFFFFFF) {
+			enabled = false;
+			status = STOPPED;
+		}
 		counts++;
  		return true;
  		}
