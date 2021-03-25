@@ -158,7 +158,7 @@ Creates a Ticker object
 - **callback** for the function name you want to call
 - **timer** set the interval time in ms or us depending from mode
 - **repeats** set the number of repeats the callback should executed, 0 is endless (default)
-- **mode** set the interval resolution to MILLIS (default) or MICROS
+- **mode** set the interval resolution to MILLIS, MICROS_MICROS or MICROS (default)
 
 **Example**
 
