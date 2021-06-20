@@ -103,10 +103,7 @@ uint32_t Ticker::elapsed() {
 	}
 
 uint32_t Ticker::remaining() {
-	if (resolution == MILLIS) {
-		return timer / 1000 - elapsed();
-		}
-	else return timer - elapsed();
+	return timer - elapsed();
 	}
 
 status_t Ticker::state() {
