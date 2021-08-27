@@ -1,4 +1,5 @@
 # Arduino Ticker Library v4.x.x
+**Advice: for use with ESP boards and mbed based Arduino boards like Arduino Nano RP2040 Connect and Raspberry Pi Pico (using the official Arduino core) the TickTwo library [https://github.com/sstaub/TickTwo](https://github.com/sstaub/TickTwo) is recommanded**
 
 The **Arduino Ticker Library** allows you to create easily Ticker callbacks, which can call a function in a predetermined interval. You can change the number of repeats of the callbacks, if repeats is 0 the ticker runs in endless mode. Works like a "thread", where a secondary function will run when necessary. The library use no interupts of the hardware timers and works with the **micros() / millis()** function. You are not (really) limited in the number of Tickers.
 
@@ -150,7 +151,7 @@ enum status_t {
 ### Constructors
 
 ```cpp
-Tickers::Tickers(fptr callback, uint32_t timer, uint16_t repeats, interval_t mode)
+Ticker::Ticker(fptr callback, uint32_t timer, uint16_t repeats, interval_t mode)
 ```
 
 Creates a Ticker object
@@ -163,16 +164,16 @@ Creates a Ticker object
 **Example**
 
 ```cpp
-Tickers timer(blink, 1000); // calls function blink() every second, internal resolution is micros, running endless
-Tickers timer(blink, 1000, 5); // calls function blink() every second, internal resolution is micros, only 5 repeats
-Tickers timer(blink, 1000, 0, MILLIS); // calls function blink() every second, internal resolution is millis, running endless
-Tickers timer(blink, 1000, 0, MICROS_MICROS); // calls function blink() every 1000 microsecond, internal resolution is micros, running endless
+Ticker timer(blink, 1000); // calls function blink() every second, internal resolution is micros, running endless
+Ticker timer(blink, 1000, 5); // calls function blink() every second, internal resolution is micros, only 5 repeats
+Ticker timer(blink, 1000, 0, MILLIS); // calls function blink() every second, internal resolution is millis, running endless
+Ticker timer(blink, 1000, 0, MICROS_MICROS); // calls function blink() every 1000 microsecond, internal resolution is micros, running endless
 ```
 
 ### Destructor
 
 ```cpp
-Tickers::~Tickers()
+Ticker::~Ticker()
 ```
 Destructor for Ticker object
 
@@ -181,7 +182,7 @@ Destructor for Ticker object
 ### Ticker Start
 
 ```cpp
-void Tickers::start()
+void Ticker::start()
 ```
 
 Start the Ticker. Will count the interval from the moment that you start it. If it is paused, it will restart the Ticker.
@@ -195,7 +196,7 @@ timer.start();
 ### Ticker Resume
 
 ```cpp
-void Tickers::resume()
+void Ticker::resume()
 ```
 
 Resume the Ticker. If not started, it will start it. If paused, it will resume it. For example, in a Ticker of 5 seconds, if it was paused in 3 seconds, the resume in continue in 3 seconds. Start will set passed time to 0 and restart until get 5 seconds.
@@ -209,7 +210,7 @@ timer.resume();
 ### Ticker Pause
 
 ```cpp
-void Tickers::pause()
+void Ticker::pause()
 ```
 
 Pause the Ticker, so you can resume it.
@@ -223,7 +224,7 @@ timer.pause();
 ### Ticker Stop
 
 ```cpp
-void Tickers::stop()
+void Ticker::stop()
 ```
 
 Stop the Ticker.
@@ -237,7 +238,7 @@ timer.stop();
 ### Ticker Update
 
 ```cpp
-void Tickers::update()
+void Ticker::update()
 ```
 
 Must to be called in the main while() loop, it will check the Ticker, and if necessary, will run the callback.
@@ -253,7 +254,7 @@ while(1) {
 ### Ticker set Interval Time
 
 ```cpp
-void Tickers::interval(uint32_t timer)
+void Ticker::interval(uint32_t timer)
 ```
 
 Changes the interval time of the Ticker. Depending from the mode it can millis or micro seconds.
@@ -270,7 +271,7 @@ timer.interval(500); // new interval time
 ### Ticker get Interval Time
 
 ```cpp
-uint32_t Tickers::interval()
+uint32_t Ticker::interval()
 ```
 
 Get the interval time of the Ticker. Depending from the mode it can millis or micro seconds.
@@ -285,7 +286,7 @@ intervalTime = timer.interval(); // get the interval time
 ### Ticker State
 
 ```cpp
-status_t Tickers::state()
+status_t Ticker::state()
 ```
 
 Returns the state of the Ticker.
@@ -300,7 +301,7 @@ status = timer.state();
 ### Ticker Elapsed Time
 
 ```cpp
-uint32_t Tickers::elapsed()
+uint32_t Ticker::elapsed()
 ```
 
 Returns the time passed since the last tick in ms or us depending on mode.
@@ -315,7 +316,7 @@ elapse = timer.elapsed();
 ### Ticker Remaining Time
 
 ```cpp
-uint32_t Tickers::remaining()
+uint32_t Ticker::remaining()
 ```
 
 Returns the remaining time to the next tick in ms or us depending on mode.
@@ -330,7 +331,7 @@ remain = timer.remaining();
 ### Ticker Counter
 
 ```cpp
-uint32_t Tickers::counter()
+uint32_t Ticker::counter()
 ```
 
 Get the number of executed callbacks.
