@@ -29,7 +29,7 @@
 
 /** Ticker internal resolution
  *
- * @param MICROS default, the resoöution is in micro seconds, max is 70 minutes, the real resoltuion is 4 microseconds at 16MHz CPU cycle
+ * @param MICROS default, the resolution is in micro seconds, max is 70 minutes, the real resoltuion is 4 microseconds at 16MHz CPU cycle
  * @param MILLIS set the resolution to millis, for longer cycles over 70 minutes
  *
  */
