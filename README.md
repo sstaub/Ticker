@@ -22,7 +22,7 @@ The **Arduino Ticker Library** allows you to create easily Ticker callbacks, whi
 ```cpp
 Ticker tickerObject(callbackFunction, 100, 0, MICROS_MICROS) // interval is now 100us
 ```
-- smaller improvments
+- smaller improvements
 
 ## New in v2.0
 - You can determine the number of repeats, instead of modes.
@@ -30,7 +30,7 @@ Ticker tickerObject(callbackFunction, 100, 0, MICROS_MICROS) // interval is now 
 ```cpp
 Ticker tickerObject(callbackFunction, 1000, 0, MILLIS)
 ```
-- unified data types and smaller improvments
+- unified data types and smaller improvements
 
 ## Installation
 
@@ -66,7 +66,7 @@ If you use delay(), the Ticker will be ignored! You cannot use delay() command w
 
 ## Example
 
-Complete example. Here we created five timers, you can run it and test the result in the Serial monitor and the on board LED.
+Complete example. Here we created five timers, you can run it and test the result in the Serial monitor and the onboard LED.
 
 ```cpp
 #include "Ticker.h"
@@ -114,7 +114,7 @@ void printCounter() {
   }
 
 void printCountdown() {
-  Serial.print("Countdowm ");
+  Serial.print("Countdown ");
   Serial.println(5 - timer3.counter());
   }
 
@@ -157,8 +157,8 @@ Ticker::Ticker(fptr callback, uint32_t timer, uint16_t repeats, interval_t mode)
 Creates a Ticker object
 
 - **callback** for the function name you want to call
-- **timer** set the interval time in ms or us depending from mode
-- **repeats** set the number of repeats the callback should executed, 0 is endless (default)
+- **timer** set the interval time in ms or us depending on mode
+- **repeats** set the number of repeats the callback should be executed, 0 is endless (default)
 - **mode** set the interval resolution to MILLIS, MICROS_MICROS or MICROS (default)
 
 **Example**
@@ -241,7 +241,7 @@ timer.stop();
 void Ticker::update()
 ```
 
-Must to be called in the main while() loop, it will check the Ticker, and if necessary, will run the callback.
+Has to be called in the main while() loop, it will check the Ticker, and if necessary, will run the callback.
 
 **Example**
 
@@ -257,9 +257,9 @@ while(1) {
 void Ticker::interval(uint32_t timer)
 ```
 
-Changes the interval time of the Ticker. Depending from the mode it can millis or micro seconds.
+Changes the interval time of the Ticker. Depending on the mode it can millis or micro seconds.
 
-- **timer** set the interval time in ms or us depending from mode
+- **timer** set the interval time in ms or us depending on mode
 
 
 **Example**
@@ -274,7 +274,7 @@ timer.interval(500); // new interval time
 uint32_t Ticker::interval()
 ```
 
-Get the interval time of the Ticker. Depending from the mode it can millis or micro seconds.
+Get the interval time of the Ticker. Depending on the mode it can millis or micro seconds.
 
 **Example**
 

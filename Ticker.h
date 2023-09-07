@@ -29,7 +29,7 @@
 
 /** Ticker internal resolution
  *
- * @param MICROS default, the resolution is in micro seconds, max is 70 minutes, the real resoltuion is 4 microseconds at 16MHz CPU cycle
+ * @param MICROS default, the resolution is in micro seconds, max is 70 minutes, the real resolution is 4 microseconds at 16MHz CPU cycle
  * @param MILLIS set the resolution to millis, for longer cycles over 70 minutes
  *
  */
@@ -42,7 +42,7 @@ enum resolution_t {
 /** Ticker status
  *
  * @param STOPPED default, ticker is stopped
- * @param RUNNIBG ticker is running
+ * @param RUNNING ticker is running
  * @param PAUSED ticker is paused
  *
  */
@@ -117,7 +117,7 @@ public:
 	 */
 	uint32_t interval();
 
-	/** actual ellapsed time
+	/** actual elapsed time
 	 *
 	 * @returns the elapsed time after the last tick
 	 *
